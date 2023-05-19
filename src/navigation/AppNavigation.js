@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 const AppNavigation = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="SignIn" screenOptions={{
+            <Stack.Navigator initialRouteName="Home" screenOptions={{
                 headerMode: 'screen',
                 headerTintColor: 'white',
                 headerStyle: { backgroundColor: '#000' },
