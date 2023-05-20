@@ -59,6 +59,7 @@ const AppNavigation = ({navigation}) => {
                     
                     headerShown: true,
                     title: 'Cart',
+                    
                     // headerRight: () => (
                     //     <Button
                     //     onPress={() => navigation.navigate("Cart")}
