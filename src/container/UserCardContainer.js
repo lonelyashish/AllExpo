@@ -1,68 +1,39 @@
 import { StyleSheet, Text, View, FlatList } from "react-native";
-import React from "react";
-import UserCard from "../components/UserCard";
+import React, { useEffect, useState } from "react";
 
-const DATA = [
-  {
-    id: "1",
-    name: "Bulbasaur",
-  },
-  {
-    id: "2",
-    name: "Ivysaur",
-  },
-  {
-    id: "3",
-    name: "Venusaur",
-  },
-  {
-    id: "4",
-    name: "Venusaur",
-  },
-  {
-    id: "5",
-    name: "Python",
-  },
-  {
-    id: "6",
-    name: "CP",
-  },
-  {
-    id: "7",
-    name: "ReactJs",
-  },
-  {
-    id: "8",
-    name: "NodeJs",
-  },
-  {
-    id: "9",
-    name: "MongoDb",
-  },
-  {
-    id: "10",
-    name: "ExpressJs",
-  },
-  {
-    id: "11",
-    name: "PHP",
-  },
-  {
-    id: "12",
-    name: "MySql",
-  },
-];
+import UserCard from "../components/UserCard";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchApiData } from "../redux/actions/userAction";
+
 
 const UserCardContainer = () => {
-  const renderItem = ({ item }) => <UserCard name={item.name} id={item.id} />;
+  const [currentPage, setCurrentPage] = useState(1);
+  const fetchNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+    // Perform an API request or load more data here for the next page
+    // Update your data source with the new items
+  };
+
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  console.log(user.data, "user");
+  useEffect(() => {
+    console.log("useEffect");
+    dispatch(fetchApiData());
+  }, []);
+  if (!user.data) {
+    return <Text>Loading</Text>
+  }
+  const renderItem = ({ item }) => <UserCard  imageUrl={item.avatar}first_name={item.first_name} last_name={item.last_name} email={item.email}id={item.id}  />;
   return (
     <View style={styles.container}>
-      {/* <Text>UserList</Text> */}
-
       <FlatList
-        data={DATA}
+        data={user.data.data}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item?.id}
+        onEndReached={fetchApiData} // Trigger fetchData when reaching the end of the list
+        onEndReachedThreshold={0.5} // Specify the threshold for triggering onEndReached
+      
       />
     </View>
   );
@@ -74,7 +45,8 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 10,
     paddingHorizontal: 16,
-    paddingBottom:10
+    marginBottom:20,
+    paddingBottom:150,
   },
   item: {
     backgroundColor: "#f5f520",

@@ -1,15 +1,14 @@
 import axios from 'axios';
 import { ActionTypes } from '../constants/actiontypes';
 
-const dataFetch = data => ({
-  type: ActionTypes.FETCH_ALL_DATA,
-  data,
-});
-
-export const fetchDataAll = () => dispatch => {
-  axios.get('https://jsonplaceholder.typicode.com/users')
-    .then((response) => {
-      dispatch(dataFetch(response.data));
-    })
-    console.log(data,"DATA")
-}
+export const fetchApiData = () => {
+  console.log("ASdasd");
+  return async (dispatch) => {
+    try {
+      const response = await axios.get('https://reqres.in/api/users?page=1');
+      dispatch({ type: ActionTypes.FETCH_ALL_DATA, payload: response.data });
+    } catch (error) {
+      dispatch({ type: ActionTypes.FETCH_ERROR, payload: error.message });
+    }
+  };
+};
