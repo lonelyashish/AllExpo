@@ -7,6 +7,7 @@ const initialState = {
 export const userReducers = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.FETCH_ALL_DATA:
+      console.warn(ActionTypes.FETCH_ALL_DATA,"FETCH_ALL_DATA reducers called")
       return {
         data: action.data
       }

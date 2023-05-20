@@ -11,4 +11,5 @@ export const fetchDataAll = () => dispatch => {
     .then((response) => {
       dispatch(dataFetch(response.data));
     })
+    console.log(data,"DATA")
 }

@@ -1,14 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-import UserList from '../../../components/UserList';
+import { StyleSheet, View } from "react-native";
+import React from "react";
+import UserCardContainer from "../../../container/UserCardContainer";
 
-const Home = ({ navigation }) => {
-    return (
-        <View>
-            <Text>Home</Text>
-            <UserList/>
-        </View>
-    );
+const Home = ({  }) => {
+  return (
+    <View>
+      <UserCardContainer />
+    </View>
+  );
 };
 
 export default Home;

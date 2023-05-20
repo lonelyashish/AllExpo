@@ -4,13 +4,14 @@ import { createNativeStackNavigator, TransitionPresets } from '@react-navigation
 import SignIn from '../screens/before/signIn/SignIn';
 import SignUp from '../screens/before/signUp/SignUp';
 import Home from '../screens/after/home/Home';
+import Cart from '../screens/after/cart/Cart';
 
 const Stack = createNativeStackNavigator();
 
-const AppNavigation = () => {
+const AppNavigation = ({navigation}) => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Home" screenOptions={{
+            <Stack.Navigator initialRouteName="Cart" screenOptions={{
                 headerMode: 'screen',
                 headerTintColor: 'white',
                 headerStyle: { backgroundColor: '#000' },
@@ -18,7 +19,7 @@ const AppNavigation = () => {
 
             }}>
                 <Stack.Screen name="SignIn" component={SignIn} options={{
-                    headerTitle: (props) => (<></>),
+                     title: 'Sign In',
                     headerRight: () => (
                         <Button
                             onPress={() => alert('This is a button!')}
@@ -27,10 +28,10 @@ const AppNavigation = () => {
                         />
                     ),
                     headerShown: true,
-                    // title: 'Awesome app',
                 }} />
                 <Stack.Screen name="SignUp" component={SignUp} options={{
-                    headerShown: true, headerTitle: (props) => (<></>),
+                    headerShown: true, 
+                    title: 'Sign Up',
                     headerRight: () => (
                         <Button
                             onPress={() => alert('This is a button!')}
@@ -40,7 +41,34 @@ const AppNavigation = () => {
                     ),
                     headerShown: true,
                 }} />
-                <Stack.Screen name="Home" component={Home} />
+                <Stack.Screen name="Home" component={Home}  options={{
+                    
+                    headerShown: true,
+                    title: 'Home',
+                    headerRight: () => (
+                        <Button
+                        onPress={() => navigation.navigate("Cart")}
+                            title=" Cart "
+                            color="#00cc00"
+                        />
+                    ),
+                    headerShown: true,
+                }} />
+                <Stack.Screen name="Cart" component={Cart} 
+                options={{
+                    
+                    headerShown: true,
+                    title: 'Cart',
+                    // headerRight: () => (
+                    //     <Button
+                    //     onPress={() => navigation.navigate("Cart")}
+                    //         title=" Cart "
+                    //         color="#00cc00"
+                    //     />
+                    // ),
+                    headerShown: true,
+                }}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );
