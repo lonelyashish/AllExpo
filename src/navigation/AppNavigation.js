@@ -4,16 +4,18 @@ import { createNativeStackNavigator, TransitionPresets } from '@react-navigation
 import SignIn from '../screens/before/signIn/SignIn';
 import SignUp from '../screens/before/signUp/SignUp';
 import Home from '../screens/after/home/Home';
+import Cart from '../screens/after/cart/Cart';
+import PaginationExample from '../screens/after/pagination/PaginationExample';
 
 const Stack = createNativeStackNavigator();
 
-const AppNavigation = () => {
+const AppNavigation = ({navigation}) => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="SignIn" screenOptions={{
+            <Stack.Navigator initialRouteName="Home" screenOptions={{
                 headerMode: 'screen',
                 headerTintColor: 'white',
-                headerStyle: { backgroundColor: '#000' },
+                headerStyle: { backgroundColor: '#00cc00' },
                 gestureEnabled: true,
 
             }}>
@@ -40,7 +42,27 @@ const AppNavigation = () => {
                     ),
                     headerShown: true,
                 }} />
-                <Stack.Screen name="Home" component={Home} />
+                <Stack.Screen name="Home" component={Home}  options={{
+                    headerShown: true,
+                    title: 'Home',
+
+                    // headerRight: () => (
+                    //     <Button
+                    //     onPress={() => {navigation.navigate("Cart")}}
+                    //         title=" Cart "
+                    //         color="#00cc00"
+                    //     />
+                    // ),
+                    // title: 'Awesome app',
+
+                    headerShown: true,
+                }} />
+                <Stack.Screen name="Cart" component={Cart} 
+                
+                />
+                <Stack.Screen name="PaginationExample" component={PaginationExample} 
+                
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );
