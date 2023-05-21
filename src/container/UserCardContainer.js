@@ -3,16 +3,15 @@ import React, { useEffect, useState } from "react";
 
 import UserCard from "../components/UserCard";
 import { useDispatch, useSelector } from "react-redux";
-import {  fetchApiData } from "../redux/actions/userAction";
-import { addToCart } from "../redux/actions/cartActions";
+import { addToCart, fetchApiData } from "../redux/actions/userAction";
 
 const UserCardContainer = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
-  const handleAddToCart = () => {
-    console.log("handleAddToCart")
-    dispatch(addToCart());
+  const handleAddToCart = (item) => {
+    console.log(item,"handleAddToCart");
+    dispatch(addToCart(item));
   };
 
   useEffect(() => {
@@ -23,8 +22,10 @@ const UserCardContainer = () => {
     return <Text>Loading</Text>;
   }
   const renderItem = ({ item }) => (
+
+    
     <UserCard
-     onPress={handleAddToCart}
+      onPress={handleAddToCart}
       id={item.id}
       first_name={item.first_name}
       last_name={item.last_name}
@@ -35,11 +36,12 @@ const UserCardContainer = () => {
   return (
     <View style={styles.container}>
       <FlatList
+        showsVerticalScrollIndicator={false}
+        alwaysBounceVertical={false}
         data={user.data.data}
         renderItem={renderItem}
         keyExtractor={(item) => item?.id}
-        // onEndReached={fetchApiData} // Trigger fetchData when reaching the end of the list
-        // onEndReachedThreshold={0.5} // Specify the threshold for triggering onEndReached
+        numColumns={1}
       />
     </View>
   );

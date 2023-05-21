@@ -1,18 +1,20 @@
-import { ActionTypes } from '../constants/actiontypes';
+import { ActionTypes } from "../constants/actiontypes";
 
 const initialState = {
   data: null,
   error: null,
+  cartItems: [],
 };
 
 const userReducer = (state = initialState, action) => {
-  console.log(action,"action");
+  console.log(action, "action");
   switch (action.type) {
     case ActionTypes.FETCH_ALL_DATA:
       return {
         ...state,
         data: action.payload,
         error: null,
+        cartItems:null
       };
     case ActionTypes.FETCH_ERROR:
       return {
@@ -20,14 +22,32 @@ const userReducer = (state = initialState, action) => {
         data: null,
         error: action.payload,
       };
-      
+
+    case ActionTypes.ADD_TO_CART:
+      return console.log(action.payload, "FFFFFFFF"),
+      {
+        ...state,
+        // data: null,
+        // error: null,
+        cartItems:[action.payload],
+        
+      };
+      // console.log(action,"gsdiufzxkg")
+
+    case ActionTypes.REMOVE_FROM_CART:
+      return {
+        ...state,
+        // data: null,
+        // error: null,
+        cartItems: state.cartItems.filter((item) => item.id !== action.payload),
+      };
+
     default:
       return state;
   }
 };
 
 export default userReducer;
-
 
 
 // export const userReducers = (state = initialState, action) => {
@@ -44,24 +64,20 @@ export default userReducer;
 //     //   console.warn("Reducers", ActionTypes.ADD_TO_CONSENT_LIST);
 //     //   return [action.data];
 
-
 //     // case ActionTypes.FETCH_CONSENT_LIST_DELETE:
 //     //   //logic for delete Consent
 //     //   console.warn("Reducers", ActionTypes.FETCH_CONSENT_LIST_DELETE);
 //     //   return data;
-
 
 //     // case ActionTypes.SET_CONSENT_LIST_EDIT:
 //     //   //logic for EDIT
 //     //   console.warn("Reducers", ActionTypes.SET_CONSENT_LIST_EDIT);
 //     //   return data;
 
-
 //     // case ActionTypes.SET_CONSENT_LIST_VIEW:
 //     //   //logic for VIEW
 //     //   console.warn("Reducers", ActionTypes.SET_CONSENT_LIST_VIEW);
 //     //   return data;
-
 
 //     default:
 //       return state;

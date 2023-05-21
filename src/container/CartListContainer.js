@@ -2,15 +2,12 @@ import { StyleSheet, Text, View, FlatList } from "react-native";
 import React, { useEffect } from "react";
 import CartList from "../components/CartList";
 import { useSelector } from "react-redux";
-import { removeFromCart } from "../redux/actions/cartActions";
 
 const CartListContainer = ({ item }) => {
 
-  // const handleRemoveFromCart = () => {
-  //   dispatch(removeFromCart(item.id));
-  // };
 
-  const cartItems = useSelector((state) => state.cart.cartItems);
+
+  const cartItems = useSelector((state) => state.user.cartItems);
   console.log(cartItems,"cartItems")
  
 if (!cartItems) {
@@ -19,7 +16,7 @@ if (!cartItems) {
   return (
     <View style={styles.container}>
       <FlatList
-        data={[cartItems]}
+        data={cartItems}
         renderItem={({ item }) => <CartList  id={item.id} />}
         keyExtractor={(item) => item?.id}
       />
